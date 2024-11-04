@@ -2,12 +2,16 @@
     const $counter = document.getElementById("js-counter");
 
     const clickHandler = (e) => {
-        const $TargetButton = e.currentTarget;
+        const TargetButton = e.currentTarget.textContent;
         let currentCount = parseInt($counter.textContent);
-        if($TargetButton.textContent === "+"){
+        if(TargetButton === "+"){
             $counter.textContent = currentCount + 1; 
-        } else {
+        } else if (TargetButton === "-") {
             $counter.textContent = currentCount - 1;
+        } else if (TargetButton === "+10"){
+            $counter.textContent = currentCount + 10;
+        } else {
+            $counter.textContent = currentCount - 10;
         }
     };
 
