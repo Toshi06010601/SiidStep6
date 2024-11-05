@@ -1,29 +1,33 @@
 (() => {
     const $counter = document.getElementById("js-counter");
 
-    const waitForASecond = () => {
+    const waitForASecond = (ms) => {
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve();
-            }, 1000);
+            }, ms);
         });
     };
 
-    // TargetButtonText === "Count down" && 
+    const clapSound = new Audio("./sounds/crowd-cheer-in-school-auditorium.mp3");
 
     const clickHandler = async (e) => {
         const currentCounter = parseInt($counter.textContent);
         const TargetButtonText = e.currentTarget.textContent;
         if (TargetButtonText === "Count down" && currentCounter > 0) {
             for (let index = currentCounter; index > 0; index--) {
-                await waitForASecond();
                 $counter.textContent = index - 1;
+                if(index == 1) {continue;}
+                await waitForASecond(1000);
             }
+            clapSound.play();
         } else if(TargetButtonText === "Count up" && currentCounter < 0) {
             for (let index = currentCounter; index < 0; index++) {
-                await waitForASecond();
                 $counter.textContent = index + 1;
+                if(index == 1) {continue;}
+                await waitForASecond(1000);
             }
+            clapSound.play();
         }
     }
 
